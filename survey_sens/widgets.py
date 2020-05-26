@@ -9,11 +9,12 @@ class LikertWidget(forms.RadioSelect):
             'all': ('global/likert.css',)
         }
 
-    def __init__(self, quote, label, left, right, *args, **kwargs):
+    def __init__(self, quote, label, left, right, *args, **kwargs, ):
         self.quote = quote
         self.label = label
         self.left = left
         self.right = right
+        self.html_class = kwargs.pop('html_class', None)
 
         super().__init__(*args, **kwargs)
 
@@ -25,8 +26,8 @@ class LikertWidget(forms.RadioSelect):
                         'label': self.label,
                         'left': self.left,
                         'right': self.right,
+                        'html_class': self.html_class,
                         'optimal_width': round(85 / len(self.choices), 2),
 
                         })
         return context
-
