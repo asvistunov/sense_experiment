@@ -188,6 +188,7 @@ class Player(BasePlayer):
             label="Для ответа выберите значение на шкале от 0 до 10, где 0 - Отрицательно, а 10 - Положительно:",
             left="Отрицательно",
             right="Положительно",
+            html_class='bg-primary text-white'
         )
     )
 

@@ -14,12 +14,7 @@ class QuestionnaireF(Page):
                    'trust',
                    'happy',
                    'satisfaction',
-                   # 'homosexuality_attitude',
-                   # 'average_choice_homosexuality',
-                   # 'gender_roles_attitude',
-                   # 'average_choice_gender_roles',
-                   # 'authority_attitude',
-                   # 'average_choice_authority'
+
                    ]
 
 

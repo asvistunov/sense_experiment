@@ -9,7 +9,6 @@ SESSION_CONFIG_DEFAULTS = dict(
     real_world_currency_per_point=1.00, participation_fee=0.00, doc=""
 )
 
-
 SESSION_CONFIGS = [
     dict(
         name='baseline',
@@ -17,7 +16,6 @@ SESSION_CONFIGS = [
         app_sequence=['survey_sens'],
         info=False
     ),
-
     dict(
         name='treatment',
         num_demo_participants=2,

@@ -1,7 +1,7 @@
 <div class="col-form-label text-left">{{ quote }}</div>
 <div><small>{{ label }}</small></div>
 <input type="hidden" value='{{ widget.value.0 }}' id="id_{{ widget.name }}" name="{{ widget.name }}"/>
-<div class="row owned_by_{{ widget.name }} row-likert-wrapper">
+<div class="row owned_by_{{ widget.name }} row-likert-wrapper {{ html_class }}">
     <div class="col-xs-12 likert-wrapper">
         <div class=" likert-header likert-left-header">
             <div  class="text-right ">
