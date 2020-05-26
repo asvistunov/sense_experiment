@@ -1,0 +1,19 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Вы Отправитель
+{% endblock %}
+
+{% block content %}
+    {% if  session.config.info %}
+        <p> Другой пользователь ответил {{ player.other.homosexuality_attitude }}</p>
+    {% endif %}
+
+    <p> Также, напишите сумму, которую, по Вашему мнению, <b>думает</b> получить другой игрок.</p>
+
+    {% formfield group.expected_sender %}
+
+    {% next_button %}
+
+{% endblock %}

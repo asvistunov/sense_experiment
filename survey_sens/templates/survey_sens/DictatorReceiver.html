@@ -1,0 +1,16 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Вы Получатель
+{% endblock %}
+
+{% block content %}
+    <p>
+        Вам выпала роль <b>Получателя.</b> Вы не можете повлиять на решение другого игрока.
+    </p>
+    <p> Какую сумму, по Вашему мнению, отправит Вам другой игрок?</p>
+    {% formfield group.expected_receiver %}
+    {% next_button %}
+
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Ваш выбор
+{% endblock %}
+
+{% block content %}
+    <p>Вы отправитель. Выберите сумму, которую хотите отправить Игроку 2.</p>
+    {% formfields %}
+    {% next_button %}
+
+{% endblock %}

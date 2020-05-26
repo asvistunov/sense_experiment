@@ -1,0 +1,20 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Вы Отправитель
+{% endblock %}
+
+{% block content %}
+    {% if  session.config.info %}
+        <p> Другой пользователь ответил {{ player.other.homosexuality_attitude }}</p>
+    {% endif %}
+
+
+    <p> Вам выпала роль <b>Отправителя.</b> У вас есть 100 рублей, которые Вы можете разделить любым способом.</p>
+    <p> Выберите сумму, которую хотите отправить, остаток Вы получаете в качестве дополнительной платы. </p>
+    {% formfield group.sent_amount %}
+
+    {% next_button %}
+
+{% endblock %}

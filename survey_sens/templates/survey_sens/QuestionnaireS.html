@@ -1,0 +1,15 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Заполнитие все поля на этой странице.
+{% endblock %}
+
+{% block content %}
+    {% if session.config.info and player.id_in_group == 2 %}
+        <p> Один из этих вопросов <b> будет</b> показан Отправителю </p>
+    {% endif %}
+    {% formfields %}
+    {% next_button %}
+
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Заполнитие все поля на этой странице.
+{% endblock %}
+
+{% block content %}
+    {% formfields %}
+    {% next_button %}
+
+{% endblock %}
