@@ -6,14 +6,15 @@
 {% endblock %}
 
 {% block content %}
-    {% if player.id_in_group == 1 %}
-        <p>
-            Вы отправили Игроку 2 {{ group.sent_amount }}.
-            Therefore, your total payoff is {{ player.payoff }}.
-        </p>
+    {% if player.role == 'dictator' %}
+
+        <div>Вы отправили второму участнику {{ group.sent_amount }}.</div>
+        <div>Тем самым, ваш бонус составит <span class="font-weight-bold">{{ player.payoff }}.</span></div>
+
+
     {% else %}
         <p>
-            <p> Игрок один отправил Вам: {{ group.sent_amount }}. Поэтому Ваша прибыль {{ player.payoff }}</p>
+        <p> Игрок один отправил Вам: {{ group.sent_amount }}. Поэтому Ваша прибыль {{ player.payoff }}</p>
         </p>
     {% endif %}
 
