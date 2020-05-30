@@ -1,6 +1,13 @@
 from otree.api import Currency as c, currency_range
-from ._builtin import Page, WaitPage
+from ._builtin import WaitPage
+from survey_sens.generic_pages import Page
 from .models import Constants
+
+
+class FirstWP(WaitPage):
+    group_by_arrival_time = True
+
+
 
 
 class QuestionnaireF(Page):
@@ -66,7 +73,7 @@ class DictatorSenderExpected(Page):
         return self.player.role() == 'dictator'
 
 
-class WaitPageP1(WaitPage):
+class BeforeResults(WaitPage):
     after_all_players_arrive = 'set_payoffs'
 
 
@@ -75,14 +82,15 @@ class Results(Page):
 
 
 page_sequence = [
-    IntroGame,
+    FirstWP,
+
     GameDescription,
     QuestionnaireS,
     BeforeDictator,
     DictatorSender,
     DictatorReceiver,
     DictatorSenderExpected,
-    WaitPageP1,
+    BeforeResults,
     Results,
     QuestionnaireF
 ]

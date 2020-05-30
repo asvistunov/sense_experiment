@@ -1,8 +1,98 @@
 {% extends "otree/Page.html" %}
-{% load otree %}
+{% load otree static i18n %}
 
-{% block global_styles  %}
+{% block global_styles %}
+    <style>
+        .col-form-label {
+            font-weight: bold;
+        }
+
+        .otree-body {
+            max-width: 1140px;
+        }
+
+        .controls.field-answer {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: center;
+        }
+
+        .shadow {
+            box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
+        }
+
+        .progress {
+            min-height: {{ progress_bar_height|default_if_none:10 }}px;
+        }
+
+        .progress_text {
+            white-space: nowrap;
+        }
+
+        .text-monospace {
+            font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        }
+
+        .menu-wrapper {
+
+            -webkit-box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.75);
+            -moz-box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.75);
+            box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.75);
+        }
+    .otree-body{margin-top:84px!important;}
+    </style>
+    <style>
+        code {
+            color: #080808
+        }
+
+        .bold {
+            font-weight: bold
+        }
+
+        .darkred {;
+            color: darkred
+        }
+
+    </style>
+
+
 {% endblock %}
 
-{% block global_scripts  %}
+
+
+
+{% block body_main %}
+    {% block progress %}
+        {% include 'global/includes/menu.html' %}
+    {% endblock %}
+
+
+    <div class="otree-body container my-5">
+        <h2 class="otree-title page-header">{% block title %}{% endblock %}</h2>
+        {% if view.remaining_timeout_seconds != None %}
+            {% include 'otree/includes/TimeLimit.html' with form_element_id="form" %}
+        {% endif %}
+        {% if form.errors %}
+            <div class="otree-form-errors alert alert-danger">
+                {% blocktrans trimmed %}Please fix the errors in the form.{% endblocktrans %}
+                {{ form.non_field_errors|default_if_none:'' }}
+            </div>
+
+
+        {% endif %}
+        <form action="" method="post" role="form" id="form" autocomplete="off">{% csrf_token %}
+
+            <div class="_otree-content">{% block content %}{% endblock %}</div>
+        </form>
+        <br/>
+        {% block footer %}
+            {% include 'global/includes/footer.html' %}
+        {% endblock %}
+        {% if view.is_debug|default:False %}
+            <br>
+            {% include 'otree/includes/debug_info.html' %}
+        {% endif %}
+    </div>
 {% endblock %}
+
