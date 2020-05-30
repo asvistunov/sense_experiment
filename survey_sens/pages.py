@@ -47,7 +47,7 @@ class DictatorSender(Page):
     form_fields = ['sent_amount']
 
     def is_displayed(self):
-        return self.player.id_in_group == 1
+        return self.player.role() == 'dictator'
 
 
 class DictatorReceiver(Page):
@@ -55,7 +55,7 @@ class DictatorReceiver(Page):
     form_fields = ['expected_receiver']
 
     def is_displayed(self):
-        return self.player.id_in_group == 2
+        return self.player.role() == 'receiver'
 
 
 class DictatorSenderExpected(Page):
@@ -63,7 +63,7 @@ class DictatorSenderExpected(Page):
     form_fields = ['expected_sender']
 
     def is_displayed(self):
-        return self.player.id_in_group == 1
+        return self.player.role() == 'dictator'
 
 
 class WaitPageP1(WaitPage):
@@ -74,13 +74,15 @@ class Results(Page):
     pass
 
 
-page_sequence = [IntroGame,
-                 GameDescription,
-                 QuestionnaireS,
-                 BeforeDictator,
-                 DictatorSender,
-                 DictatorReceiver,
-                 DictatorSenderExpected,
-                 WaitPageP1,
-                 Results,
-                 QuestionnaireF]
+page_sequence = [
+    IntroGame,
+    GameDescription,
+    QuestionnaireS,
+    BeforeDictator,
+    DictatorSender,
+    DictatorReceiver,
+    DictatorSenderExpected,
+    WaitPageP1,
+    Results,
+    QuestionnaireF
+]

@@ -49,13 +49,18 @@ class Group(BaseGroup):
     )
 
     def set_payoffs(self):
-        p1 = self.get_player_by_id(1)
-        p2 = self.get_player_by_id(2)
-        p1.payoff = Constants.endowment - self.sent_amount
-        p2.payoff = self.sent_amount
+        dictator = self.get_player_by_role('dictator')
+        receiver = self.get_player_by_role('receiver')
+        dictator.payoff = Constants.endowment - self.sent_amount
+        receiver.payoff = self.sent_amount
 
 
 class Player(BasePlayer):
+    def role(self):
+        if self.id_in_group == 1:
+            return 'dictator'
+        else:
+            return 'receiver'
 
     def other(self):
         return self.get_others_in_group()[0]
@@ -109,17 +114,6 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect,
     )
 
-    # relative_income = models.IntegerField(
-    #     label="Ваш средний ежемесячный доход?",
-    #     choices=[
-    #         [1, '...ниже, чем в среднем в вашем городе'],
-    #         [2, '...такой же, как в среднем в вашем городе'],
-    #         [3, '...выше, чем в среднем в вашем городе'],
-    #         [4, 'Затрудняюсь ответить'],
-    #     ],
-    #     widget=widgets.RadioSelect
-    # )
-
     relative_income_2 = models.IntegerField(
         label='Какое высказывание наиболее точно описывает финансовое положение вашей семьи?',
         choices=[
@@ -170,7 +164,7 @@ class Player(BasePlayer):
 
     satisfaction = models.IntegerField(
         label='',
-        choices=range(1,11),
+        choices=range(1, 11),
         widget=LikertWidget(
             quote="Учитывая все обстоятельства, насколько Вы удовлетворены вашей жизнью в целом в эти дни?",
             label="Для ответа выберите значение на шкале от 0 до 10, где 0 - Cовершенно не удовлетворен, а 10 -  Полностью удовлетворен:",

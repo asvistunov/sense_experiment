@@ -13,9 +13,12 @@
 
 
     {% else %}
-        <p>
-        <p> Игрок один отправил Вам: {{ group.sent_amount }}. Поэтому Ваша прибыль {{ player.payoff }}</p>
-        </p>
+        <div>
+            Первый игрок отправил Вам: {{ group.sent_amount }}.
+        </div>
+        <div>
+            Поэтому Ваш бонус составит {{ player.payoff }}
+        </div>
     {% endif %}
 
 
