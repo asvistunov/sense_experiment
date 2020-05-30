@@ -236,6 +236,7 @@ class Player(BasePlayer):
             label="Для ответа выберите значение на шкале от 0 до 10, где 0 - Плохо, 10 - Хорошо ",
             left="Плохо",
             right="Хорошо",
+            html_class='bg-primary text-white'
         )
     )
 
