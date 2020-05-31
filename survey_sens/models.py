@@ -50,7 +50,7 @@ class Group(BaseGroup):
     sent_amount = models.CurrencyField(
         max=c(100),
         min=c(0),
-        label=f"Сколько вы хотите отправить участнику 2 (Получателю), от 0 до {Constants.endowment} центов?"
+        label=f"Сколько вы хотите отправить участнику 2 (Получателю) - выберите любую сумму от 0 до {Constants.endowment} центов?"
     )
 
     expected_sender = models.CurrencyField(
