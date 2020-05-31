@@ -9,8 +9,8 @@
 
     {% if  session.config.info %}
         <link rel="stylesheet" href="{% static 'global/css/likert.css' %}">
-        Ответ другого участника (отмечен <span class="bg-danger text-white">красным цветом</span>):
-        <div class="card">
+       <div> Ответ другого участника (отмечен <span class="bg-danger text-white">красным цветом</span>):</div>
+        <div class="card my-3">
             <div class="card-body">
                 {{ player.get_other_answer }}
             </div>
