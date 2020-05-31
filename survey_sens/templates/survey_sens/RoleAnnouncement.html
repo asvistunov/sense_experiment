@@ -1,0 +1,34 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="alert alert-danger text-center lead">
+        Ваша роль: <span class="font-weight-bold">{{ player.role_desc }}</span>
+    </div>
+    <div class="card my-3">
+    <div class="card-body">
+        {% if player.role == 'dictator' %}
+        Это означает, что от вашего решения будет зависеть бонус - ваш и второго участника.
+        {% else %}
+        Это означает, что от решения второго участника будет зависеть ваш и его  бонус.
+
+        {% endif %}
+    </div>
+    </div>
+      <div class="card my-3">
+    <div class="card-body">
+    <div>На следующей странице вам необходимо будет ответить на несколько вопросов.</div>
+    </div></div>
+    {% if  session.config.info %}
+        {% include  'survey_sens/includes/info_warning.html' %}
+    {% endif %}
+    <div class="my-3">
+    {% next_button %}
+    </div>
+{% endblock %}
+
+

@@ -6,11 +6,8 @@
 {% endblock %}
 
 {% block content %}
-    {% if  session.config.info %}
-        <p> Другой пользователь ответил {{ player.other.homosexuality_attitude }}</p>
-    {% endif %}
 
-    <p> Также, напишите сумму, которую, по Вашему мнению, <b>думает</b> получить другой игрок.</p>
+    <p> По-вашему, сколько другой участник (<b>Получатель</b>) полагает, что вы ему пошлете (от 0 до 100 центов).</p>
 
     {% formfield group.expected_sender %}
 
