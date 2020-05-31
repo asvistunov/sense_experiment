@@ -21,9 +21,9 @@ class Constants(BaseConstants):
     name_in_url = 'survey_sens'
     players_per_group = 2
     num_rounds = 1
-
-    endowment = c(100)
-
+    Range010 = range(0, 11)
+    endowment = 100
+    average_quote = "По-вашему, как  участники этого исследования  в среднем ответили на предыдущий вопрос?"
 
 class Subsession(BaseSubsession):
     pass
@@ -33,7 +33,7 @@ class Group(BaseGroup):
     sent_amount = models.CurrencyField(
         max=c(100),
         min=c(0),
-        label="Сколько вы хотите отправить игроку 2?"
+        label=f"Сколько вы хотите отправить участнику 2 (Получателю), от 0 до {Constants.endowment} центов?"
     )
 
     expected_sender = models.CurrencyField(
@@ -64,6 +64,12 @@ class Player(BasePlayer):
 
     def other(self):
         return self.get_others_in_group()[0]
+
+    def role_desc(self):
+        """Return russian description of role"""
+        descs = dict(dictator="Отправитель",
+                     receiver="Получатель")
+        return descs.get(self.role())
 
     age = models.IntegerField(
         min=0,
@@ -176,10 +182,10 @@ class Player(BasePlayer):
 
     homosexuality_attitude = models.IntegerField(
         label="",
-        choices=range(1, 11),
+        choices=Constants.Range010,
         widget=LikertWidget(
-            quote="Укажите, как вы относитесь к людям гомосексуальной ориентации, геям, лесбиянкам?",
-            label="Для ответа выберите значение на шкале от 0 до 10, где 0 - Отрицательно, а 10 - Положительно:",
+            quote="Как вы относитесь к людям гомосексуальной ориентации, геям, лесбиянкам?",
+            label="Выберите значение на шкале от 0 до 10, где 0 - Отрицательно, а 10 - Положительно:",
             left="Отрицательно",
             right="Положительно",
             html_class='bg-primary text-white'
@@ -188,10 +194,10 @@ class Player(BasePlayer):
 
     average_choice_homosexuality = models.IntegerField(
         label="",
-        choices=range(1, 11),
+        choices=Constants.Range010,
         widget=LikertWidget(
-            quote="Укажите, как вы думаете, в среднем участники этого исследования будут отвечать на этот вопрос?",
-            label="Для ответа выберите значение на шкале от 0 до 10, где 0 - Отрицательно, а 10 - Положительно:",
+            quote=Constants.average_quote,
+            label="Выберите значение на шкале от 0 до 10, где 0 - Отрицательно, а 10 - Положительно:",
             left="Отрицательно",
             right="Положительно",
 
@@ -199,23 +205,24 @@ class Player(BasePlayer):
     )
     gender_roles_attitude = models.IntegerField(
         label="",
-        choices=range(1, 11),
+        choices=Constants.Range010,
         widget=LikertWidget(
-            quote="Укажите, насколько вы согласны с утверждением, что дело мужа — зарабатывать деньги, а дело жены — "
-                  "вести домашнее хозяйство и заниматься семьей.",
-            label="Для ответа выберите значение на шкале от 0 до 10, где 0 - Полностью не согласен, 10 - Полностью "
+            quote="Насколько вы согласны с утверждением: 'дело мужа — зарабатывать деньги, а дело жены — "
+                  "вести домашнее хозяйство и заниматься семьей.'",
+            label="Выберите значение на шкале от 0 до 10, где 0 - Полностью не согласен, 10 - Полностью "
                   "Согласен",
             left="Полностью не согласен",
             right="Полностью согласен",
+            html_class='bg-primary text-white'
         )
     )
 
     average_choice_gender_roles = models.IntegerField(
         label="",
-        choices=range(1, 11),
+        choices=Constants.Range010,
         widget=LikertWidget(
-            quote="Укажите, как вы думаете, в среднем участники этого исследования будут отвечать на этот вопрос?",
-            label="Для ответа выберите значение на шкале от 0 до 10, где 0 - Полностью не согласен, 10 - Полностью "
+            quote=Constants.average_quote,
+            label="Выберите значение для ответа на шкале от 0 до 10, где 0 - Полностью не согласен, 10 - Полностью "
                   "Согласен",
             left="Полностью не согласен",
             right="Полностью согласен",
@@ -224,10 +231,10 @@ class Player(BasePlayer):
 
     authority_attitude = models.IntegerField(
         label="",
-        choices=range(1, 11),
+        choices=Constants.Range010,
         widget=LikertWidget(
-            quote="Укажите, как вы считаете, насколько В. Путин справляется с обязанностями президента",
-            label="Для ответа выберите значение на шкале от 0 до 10, где 0 - Плохо, 10 - Хорошо ",
+            quote="Как вы считаете, насколько В. Путин справляется с обязанностями президента",
+            label="Выберите значение на шкале от 0 до 10, где 0 - Плохо, 10 - Хорошо ",
             left="Плохо",
             right="Хорошо",
             html_class='bg-primary text-white'
@@ -236,10 +243,10 @@ class Player(BasePlayer):
 
     average_choice_authority = models.IntegerField(
         label="",
-        choices=range(1, 11),
+        choices=Constants.Range010,
         widget=LikertWidget(
-            quote="Укажите, как вы думаете, в среднем участники этого исследования будут отвечать на этот вопрос?",
-            label="Для ответа выберите значение на шкале от 0 до 10, где 0 - Плохо, 10 - Хорошо",
+            quote=Constants.average_quote,
+            label="Выберите значение на шкале от 0 до 10, где 0 - Плохо, 10 - Хорошо",
             left="Плохо",
             right="Хорошо",
         )

@@ -1,0 +1,19 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Ваша роль:
+{% endblock %}
+
+{% block content %}
+    <div class="alert alert-danger">
+        Ваша роль: <span class="font-weight-bold">{{ player.role_desc }}</span>
+    </div>
+    <div>На следующей странице вам необходимо будет ответить на несколько вопросов.</div>
+    {% if  session.config.info %}
+        {% include  'survey_sens/includes/info_warning.html' %}
+    {% endif %}
+    {% next_button %}
+{% endblock %}
+
+

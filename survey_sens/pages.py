@@ -8,8 +8,6 @@ class FirstWP(WaitPage):
     group_by_arrival_time = True
 
 
-
-
 class QuestionnaireF(Page):
     form_model = 'player'
     form_fields = ['age',
@@ -42,6 +40,10 @@ class IntroGame(Page):
 
 
 class GameDescription(Page):
+    pass
+
+
+class RoleAnnouncement(Page):
     pass
 
 
@@ -85,6 +87,7 @@ page_sequence = [
     FirstWP,
 
     GameDescription,
+    RoleAnnouncement,
     QuestionnaireS,
     BeforeDictator,
     DictatorSender,

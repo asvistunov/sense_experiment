@@ -6,10 +6,12 @@
     color: black;
     font-family: 'Lato', sans-serif;
     background-color: lightgray;
+    margin-left:5px;
 }
 
 .btn-scale:hover {
     background-color: #2CDE00;
+
 }
 
 .btn-scale-checked {
@@ -44,7 +46,7 @@
     justify-content: center;
     align-items: center;
  flex-grow: 1;
-    flex-basis: 100px;
+    flex-basis: 50px;
     padding: 5px;
 }
 
