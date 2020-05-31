@@ -2,7 +2,7 @@ from otree.api import Currency as c, currency_range
 from ._builtin import WaitPage
 from survey_sens.generic_pages import Page
 from .models import Constants
-
+import json
 
 class FirstWP(WaitPage):
     group_by_arrival_time = True
@@ -25,14 +25,9 @@ class QuestionnaireF(Page):
 
 class QuestionnaireS(Page):
     form_model = 'player'
-    form_fields = [
-        'homosexuality_attitude',
-        'average_choice_homosexuality',
-        'gender_roles_attitude',
-        'average_choice_gender_roles',
-        'authority_attitude',
-        'average_choice_authority'
-    ]
+
+    def get_form_fields(self):
+        return json.loads(self.player.q_order)
 
 
 class IntroGame(Page):

@@ -9,11 +9,13 @@ from otree.api import (
     currency_range,
 )
 from .widgets import LikertWidget
+import json
+import random
 
-author = 'Alexander Svistunov'
+author = 'Alexander Svistunov, Philipp Chapkovski'
 
 doc = """
-Your app description
+Dictator game, social conformity game.
 """
 
 
@@ -25,8 +27,23 @@ class Constants(BaseConstants):
     endowment = 100
     average_quote = "По-вашему, как  участники этого исследования  в среднем ответили на предыдущий вопрос?"
 
+    sensquestions = [
+        ['homosexuality_attitude',
+         'average_choice_homosexuality', ],
+        ['gender_roles_attitude',
+         'average_choice_gender_roles', ],
+        ['authority_attitude',
+         'average_choice_authority'],
+    ]
+
+
 class Subsession(BaseSubsession):
-    pass
+    def creating_session(self):
+        for p in self.get_players():
+            newqs = Constants.sensquestions.copy()
+            random.shuffle(newqs)
+            flatten_qs = [item for sublist in newqs for item in sublist]
+            p.q_order = json.dumps(flatten_qs)
 
 
 class Group(BaseGroup):
@@ -71,6 +88,7 @@ class Player(BasePlayer):
                      receiver="Получатель")
         return descs.get(self.role())
 
+    q_order = models.StringField(doc='to store randomized order of sensitive questions')
     age = models.IntegerField(
         min=0,
         label="Укажите Ваш возраст:"
