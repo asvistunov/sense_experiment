@@ -1,0 +1,30 @@
+<div class="col-form-label text-left">{{ widget.quote }}</div>
+<div><small>{{ widget.label }}</small></div>
+<style>
+    .btn-scale:hover {
+    background-color: unset;
+
+}
+</style>
+<div class="row  row-likert-wrapper ">
+    <div class="col-xs-12 likert-wrapper">
+        <div class=" likert-header likert-left-header">
+            <div  class="text-right ">
+                {{ widget.left }}
+            </div>
+        </div>
+
+        <div class="chart-scale">
+            {% for foo in choices %}
+                <button class="btn btn-scale {% if  foo.0 == answer%}btn-scale-red{% endif %}  " role="button" type="button" data-value="{{ foo.0 }}" disabled>
+                    {{ foo.1 }}
+                </button>
+            {% endfor %}
+        </div>
+        <div class=" likert-header likert-right-header">
+            <div class="text-left ">
+                {{ widget.right }}
+            </div>
+        </div>
+    </div>
+</div>

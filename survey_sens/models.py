@@ -11,6 +11,7 @@ from otree.api import (
 from .widgets import LikertWidget
 import json
 import random
+from django.template.loader import render_to_string
 
 author = 'Alexander Svistunov, Philipp Chapkovski'
 
@@ -26,7 +27,7 @@ class Constants(BaseConstants):
     Range010 = range(0, 11)
     endowment = 100
     average_quote = "По-вашему, как  участники этого исследования  в среднем ответили на предыдущий вопрос?"
-
+    q_to_show = 'homosexuality_attitude'
     sensquestions = [
         ['homosexuality_attitude',
          'average_choice_homosexuality', ],
@@ -79,8 +80,25 @@ class Player(BasePlayer):
         else:
             return 'receiver'
 
+    @property
     def other(self):
         return self.get_others_in_group()[0]
+
+    def get_other_answer(self):
+        """we fix the logic here showing only homosexuality question to show in info treatment.
+        But we can show any other question as well by changing the param in constants.
+        """
+        to_show = Constants.q_to_show
+        to_show_value = getattr(self.other, to_show)
+        to_show_meta = self._meta.get_field(to_show)
+
+        choices = to_show_meta.choices
+        widget = to_show_meta.widget
+        rendered = render_to_string('survey_sens/includes/likert_frozen.html',
+                                    dict(choices=choices,
+                                         widget=widget,
+                                         answer=to_show_value))
+        return rendered
 
     def role_desc(self):
         """Return russian description of role"""

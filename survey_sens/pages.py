@@ -89,6 +89,6 @@ page_sequence = [
     DictatorReceiver,
     DictatorSenderExpected,
     BeforeResults,
+    QuestionnaireF,
     Results,
-    QuestionnaireF
 ]
