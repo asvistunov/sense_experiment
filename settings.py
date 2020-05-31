@@ -14,13 +14,17 @@ SESSION_CONFIGS = [
         name='baseline',
         num_demo_participants=2,
         app_sequence=['survey_sens'],
-        info=False
+        info=False,
+        toloka_sandbox=True,
+        toloka=True,
     ),
     dict(
         name='treatment',
         num_demo_participants=2,
         app_sequence=['survey_sens'],
-        info=True
+        info=True,
+        toloka_sandbox=True,
+        toloka=True,
     ),
 ]
 
