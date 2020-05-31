@@ -6,6 +6,7 @@
 {% endblock %}
 
 {% block content %}
+    <div class="my-3">
     {% if player.role == 'dictator' %}
 
         <div>Вы отправили второму участнику {{ group.sent_amount }}.</div>
@@ -20,7 +21,7 @@
             Поэтому Ваш бонус составит {{ player.payoff }}
         </div>
     {% endif %}
-
+</div>
 
     {% next_button %}
 {% endblock %}

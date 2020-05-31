@@ -4,6 +4,7 @@ from survey_sens.generic_pages import Page
 from .models import Constants
 import json
 
+
 class FirstWP(WaitPage):
     group_by_arrival_time = True
 
@@ -25,6 +26,7 @@ class QuestionnaireF(Page):
 
 class QuestionnaireS(Page):
     form_model = 'player'
+    show_instructions = True
 
     def get_form_fields(self):
         return json.loads(self.player.q_order)
@@ -35,11 +37,11 @@ class IntroGame(Page):
 
 
 class GameDescription(Page):
-    pass
+    show_instructions = True
 
 
 class RoleAnnouncement(Page):
-    pass
+    show_instructions = True
 
 
 class BeforeDictator(WaitPage):
@@ -47,6 +49,7 @@ class BeforeDictator(WaitPage):
 
 
 class DictatorSender(Page):
+    show_instructions = True
     form_model = 'group'
     form_fields = ['sent_amount']
 
@@ -55,6 +58,7 @@ class DictatorSender(Page):
 
 
 class DictatorReceiver(Page):
+    show_instructions = True
     form_model = 'group'
     form_fields = ['expected_receiver']
 
@@ -63,6 +67,7 @@ class DictatorReceiver(Page):
 
 
 class DictatorSenderExpected(Page):
+    show_instructions = True
     form_model = 'group'
     form_fields = ['expected_sender']
 
@@ -80,7 +85,6 @@ class Results(Page):
 
 page_sequence = [
     FirstWP,
-
     GameDescription,
     RoleAnnouncement,
     QuestionnaireS,

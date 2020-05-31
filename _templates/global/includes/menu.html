@@ -12,7 +12,17 @@
             </div>
         {% endif %}
 
-
+        {% if view.show_instructions|default_if_none:False %}
+            <nav class="navbar navbar-expand navbar-expand-lg navbar-light bg-light">
+                <div class=" navbar-expand ml-auto  " id="navbarToggler">
+                    <div class="btn-group navbar-nav ml-auto mt-2 mt-lg-0 " role="group" aria-label="Menu buttons">
+                        <button class="btn btn-outline-primary nav-item" role="button"
+                                onclick="$('#instructionsModal').modal('show')">Инструкция
+                        </button>
+                    </div>
+                </div>
+            </nav>
+        {% endif %}
     </div>
 {% endif %}
 

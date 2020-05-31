@@ -66,7 +66,9 @@
     {% block progress %}
         {% include 'global/includes/menu.html' %}
     {% endblock %}
-
+    {% if view.show_instructions|default_if_none:False %}
+        {% include 'global/includes/instructions_modal.html' %}
+    {% endif %}
 
     <div class="otree-body container my-5">
         <h2 class="otree-title page-header">{% block title %}{% endblock %}</h2>
