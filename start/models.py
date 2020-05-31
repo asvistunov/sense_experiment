@@ -21,7 +21,7 @@ class Constants(BaseConstants):
     name_in_url = 'start'
     players_per_group = None
     num_rounds = 1
-    toloka_fix_payment = 0.20
+    toloka_fix_payment = 0.25
 
 class Subsession(BaseSubsession):
     pass
