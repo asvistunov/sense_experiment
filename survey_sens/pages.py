@@ -7,7 +7,7 @@ import json
 
 class FirstWP(WaitPage):
     group_by_arrival_time = True
-
+    body_text = 'Пожалуйста, подождите пока мы находим еще одного участника Толоки...'
 
 class QuestionnaireF(Page):
     form_model = 'player'
@@ -44,7 +44,7 @@ class RoleAnnouncement(Page):
     show_instructions = True
 
 
-class BeforeDictator(WaitPage):
+class BeforeDictatorWP(WaitPage):
     pass
 
 
@@ -75,7 +75,7 @@ class DictatorSenderExpected(Page):
         return self.player.role() == 'dictator'
 
 
-class BeforeResults(WaitPage):
+class BeforeResultsWP(WaitPage):
     after_all_players_arrive = 'set_payoffs'
 
 
@@ -85,14 +85,13 @@ class Results(Page):
 
 page_sequence = [
     FirstWP,
-    GameDescription,
     RoleAnnouncement,
     QuestionnaireS,
-    BeforeDictator,
+    BeforeDictatorWP,
     DictatorSender,
     DictatorReceiver,
     DictatorSenderExpected,
-    BeforeResults,
+    BeforeResultsWP,
     QuestionnaireF,
     Results,
 ]

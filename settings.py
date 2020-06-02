@@ -4,9 +4,13 @@ from os import environ
 # in SESSION_CONFIGS, except those that explicitly override it.
 # the session config can be accessed from methods in your apps as self.session.config,
 # e.g. self.session.config['participation_fee']
-
+TOLOKA_PARTICIPATION_FEE = environ.get('TOLOKA_PARTICIPATION_FEE', 0.25)
 SESSION_CONFIG_DEFAULTS = dict(
-    real_world_currency_per_point=.01, participation_fee=0.00, doc=""
+    real_world_currency_per_point=.01,
+    participation_fee=0.00,
+    doc="",
+    use_browser_bots=False,
+    toloka_participation_fee=TOLOKA_PARTICIPATION_FEE
 )
 
 SESSION_CONFIGS = [
