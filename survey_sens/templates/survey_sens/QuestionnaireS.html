@@ -2,14 +2,15 @@
 {% load otree static %}
 
 {% block title %}
-    Заполнитие все поля на этой странице.
+   Анкета
 {% endblock %}
 
 {% block content %}
-    {{ form.media }}
-    {% if session.config.info and player.id_in_group == 2 %}
-        <p> Один из вопросов, выделенных синим цветом, <b> будет</b> показан Отправителю </p>
+      {% if  session.config.info %}
+        {% include  'survey_sens/includes/info_warning.html' %}
     {% endif %}
+    {{ form.media }}
+
     {% formfields %}
     {% next_button %}
 

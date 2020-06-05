@@ -2,11 +2,11 @@ from django import forms
 
 
 class LikertWidget(forms.RadioSelect):
-    template_name = 'survey_sens/likert.html'
+    template_name = 'survey_sens/includes/likert.html'
 
     class Media:
         css = {
-            'all': ('global/likert.css',)
+            'all': ('global/css/likert.css',)
         }
 
     def __init__(self, quote, label, left, right, *args, **kwargs, ):

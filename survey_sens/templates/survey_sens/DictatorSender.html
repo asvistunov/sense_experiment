@@ -2,19 +2,65 @@
 {% load otree static %}
 
 {% block title %}
-    Вы Отправитель
+    Вы {{ player.role_desc }}
 {% endblock %}
 
 {% block content %}
+
     {% if  session.config.info %}
-        <p> Другой пользователь ответил {{ player.other.homosexuality_attitude }}</p>
+        <link rel="stylesheet" href="{% static 'global/css/likert.css' %}">
+        <div> Ответ другого участника (отмечен <span class="bg-danger text-white">красным цветом</span>):</div>
+        <div class="card my-3">
+            <div class="card-body">
+                {{ player.get_other_answer }}
+            </div>
+        </div>
+
     {% endif %}
 
 
-    <p> Вам выпала роль <b>Отправителя.</b> У вас есть 100 рублей, которые Вы можете разделить любым способом.</p>
-    <p> Выберите сумму, которую хотите отправить, остаток Вы получаете в качестве дополнительной платы. </p>
+    <p> Вам выпала роль <b>Отправителя.</b> У вас есть 100 центов ($1), которые Вы можете разделить любым способом.</p>
+    <p> Выберите сумму в центах, которую хотите отправить, остаток Вы получаете в виде бонуса в Толоке. </p>
     {% formfield group.sent_amount %}
 
+    <div class="form-group ">
+
+
+        <label class="col-form-label">Ваш бонус составит:</label>
+        <div class="controls  ">
+            <div class="input-group input-group-narrow">
+                <input type="number" value="None" step="1" min="0" max="100" required="" id="id_bonus_left"
+                       class="form-control" disabled>
+
+                <div class="input-group-append">
+                    <span class="input-group-text">¢</span>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
     {% next_button %}
+
+{% endblock %}
+{% block scripts %}
+    <script>
+        const endowment = {{ Constants.endowment|json }}
+            $('#id_sent_amount').on('input', function (e) {
+                let curval = this.value;
+                if (curval > endowment) {
+                    this.value = endowment
+
+                }
+                ;
+                if (this.value === undefined || this.value === '') {
+                    $('#id_bonus_left').val(null)
+                } else {
+                    $('#id_bonus_left').val(endowment - this.value);
+                }
+            })
+    </script>
 
 {% endblock %}
